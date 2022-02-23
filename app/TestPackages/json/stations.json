@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "stationName": "恵比寿駅",
+        "lineName": "山手線"
+    },
+    {
+        "id": 2,
+        "stationName": "新橋駅",
+        "lineName": "山手線"
+    },
+    {
+        "id": 3,
+        "stationName": "新宿駅",
+        "lineName": "山手線"
+    }
+]
