@@ -38,6 +38,7 @@ func main() {
 		response := new(Response)
 		response.Stations = stations
 		fmt.Println(stations)
+		c.Response().Header().Set(echo.HeaderAccessControlAllowOrigin, "http://localhost:4200")
         return c.JSON(http.StatusOK, response)
     })
     e.Logger.Fatal(e.Start(":8080"))

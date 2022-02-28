@@ -13,5 +13,20 @@
         "id": 3,
         "stationName": "新宿駅",
         "lineName": "山手線"
+    },
+    {
+        "id": 4,
+        "stationName": "浜松町駅",
+        "lineName": "山手線"
+    },
+    {
+        "id": 5,
+        "stationName": "池袋駅",
+        "lineName": "山手線"
+    },
+    {
+        "id": 6,
+        "stationName": "五反田駅",
+        "lineName": "山手線"
     }
 ]
