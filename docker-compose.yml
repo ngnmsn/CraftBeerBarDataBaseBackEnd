@@ -1,7 +1,18 @@
 version: "3"
 
 services:
+
+  nginx:
+    container_name: "nginx"
+    build: ./nginx
+    ports:
+        - "80:80"
+    depends_on:
+        - "app"
+
   app:
+    depends_on:
+      - db
     build:
       context: .
       dockerfile: app/Dockerfile
@@ -11,10 +22,14 @@ services:
       - "8080:8080"
     tty: true
 
-  nginx:
-        container_name: "nginx"
-        build: ./nginx
-        ports:
-            - "80:80"
-        depends_on:
-            - "app"
+  db:
+    container_name: postgres
+    build:
+      context: .
+      dockerfile: ./postgres/Dockerfile
+    ports:
+      - 5433:5433
+    environment:
+      - POSTGRES_USER=app_user
+      - POSTGRES_PASSWORD=app_password
+      - POSTGRES_DB=app_db
