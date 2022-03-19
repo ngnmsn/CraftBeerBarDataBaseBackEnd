@@ -13,7 +13,7 @@ import (
 )
 
 type Station struct {
-	Id int `json:"id"`
+	StationId int `json:"stationId"`
 	StationName string `json:"stationName"`
 	LineName string `json:"lineName"`
 }
@@ -63,7 +63,7 @@ func main() {
 		// stationsByteValue, _ := ioutil.ReadAll(stationsJsonFile)
 		// json.Unmarshal(stationsByteValue, &stations)
 		
-		sql := "SELECT id, station_name, line_name FROM STATION_MATSTER_TB;"
+		sql := "SELECT station_id, station_name, line_name FROM STATION_MATSTER_TB;"
 
 		rows, err := Db.Query(sql)
 		if err != nil {
@@ -72,11 +72,11 @@ func main() {
 		defer rows.Close()
 
 		for rows.Next(){
-			if err := rows.Scan(&station.Id, &station.StationName, &station.LineName); err != nil {
+			if err := rows.Scan(&station.StationId, &station.StationName, &station.LineName); err != nil {
 				log.Fatal(err)
 			}
 			stations = append(stations, Station{
-					Id: station.Id,
+					StationId: station.StationId,
 					StationName: station.StationName,
 					LineName: station.LineName,
 				})
