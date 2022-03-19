@@ -18,8 +18,21 @@ type Station struct {
 	LineName string `json:"lineName"`
 }
 
-type Response struct {
+type GetStationsResponse struct {
 	Stations []Station `json:"stations"`
+}
+
+type Bar struct {
+	BarId int `json:"barId"`
+	BarName string `json:"barName"`
+	NumberOfTaps int `json:"numberOfTaps"`
+	Address string `json:"address"`
+	PhoneNumber string `json:"phoneNumber"`
+	TabelogLink string `json:"tabelogLink"`	
+}
+
+type GetBarListResponse struct {
+	BarList []Bar `json:"barList"`
 }
 
 func main() {
@@ -82,13 +95,51 @@ func main() {
 				})
 		}
 
-		response := new(Response)
+		getStationsResponse := new(GetStationsResponse)
 
-		response.Stations = stations
+		getStationsResponse.Stations = stations
 
 		fmt.Println(stations)
 		c.Response().Header().Set(echo.HeaderAccessControlAllowOrigin, "http://localhost:4200")
-        return c.JSON(http.StatusOK, response)
+        return c.JSON(http.StatusOK, getStationsResponse)
+    })
+	e.GET("/getBarList", func(c echo.Context) error {
+
+		bar := new(Bar)
+		var barList []Bar
+
+		stationId := c.QueryParam("stationId")
+		fmt.Println(stationId)
+
+		sql := "SELECT a.bar_id, a.bar_name, a.number_of_taps, a.address, a.phone_number, a.tabelog_link FROM BAR_MASTER_TB a, NEAREST_STATION_TB b WHERE b.station_id = $1 AND b.bar_id = a.bar_id;"
+
+		rows, err := Db.Query(sql, stationId)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer rows.Close()
+
+		for rows.Next(){
+			if err := rows.Scan(&bar.BarId, &bar.BarName, &bar.NumberOfTaps, &bar.Address, &bar.PhoneNumber, &bar.TabelogLink); err != nil {
+				log.Fatal(err)
+			}
+			barList = append(barList, Bar{
+					BarId: bar.BarId,
+					BarName: bar.BarName,
+					NumberOfTaps: bar.NumberOfTaps,
+					Address: bar.Address,
+					PhoneNumber: bar.PhoneNumber,
+					TabelogLink: bar.TabelogLink,
+				})
+		}
+
+		getBarListResponse := new(GetBarListResponse)
+
+		getBarListResponse.BarList = barList
+
+		fmt.Println(barList)
+		c.Response().Header().Set(echo.HeaderAccessControlAllowOrigin, "http://localhost:4200")
+        return c.JSON(http.StatusOK, getBarListResponse)
     })
     e.Logger.Fatal(e.Start(":8080"))
 }
