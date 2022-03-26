@@ -108,12 +108,16 @@ func main() {
 		bar := new(Bar)
 		var barList []Bar
 
-		stationId := c.QueryParam("stationId")
-		fmt.Println(stationId)
+		keyword := c.QueryParam("keyword")
+		fmt.Println(keyword)
+		search := "%"
+		fmt.Println(search)
 
-		sql := "SELECT a.bar_id, a.bar_name, a.number_of_taps, a.address, a.phone_number, a.tabelog_link FROM BAR_MASTER_TB a, NEAREST_STATION_TB b WHERE b.station_id = $1 AND b.bar_id = a.bar_id;"
+		keywordSearch := keyword + search
 
-		rows, err := Db.Query(sql, stationId)
+		sql := "SELECT a.bar_id, a.bar_name, a.number_of_taps, a.address, a.phone_number, a.tabelog_link FROM BAR_MASTER_TB a, NEAREST_STATION_TB b, STATION_MATSTER_TB c WHERE c.station_name LIKE $1 AND c.station_id = b.station_id AND b.bar_id = a.bar_id;"
+
+		rows, err := Db.Query(sql, keywordSearch)
 		if err != nil {
 			log.Fatal(err)
 		}
