@@ -33,7 +33,7 @@ type Bar struct {
 	Food string `json:"food"`
 	Style string `json:"style"`
 	NearStationName string `json:"nearStationName"`
-	OnFootTime int `json: onFootTime`
+	OnFootTime int `json: "onFootTime"`
 }
 
 type GetBarListResponse struct {
