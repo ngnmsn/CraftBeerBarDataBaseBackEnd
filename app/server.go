@@ -28,7 +28,12 @@ type Bar struct {
 	NumberOfTaps int `json:"numberOfTaps"`
 	Address string `json:"address"`
 	PhoneNumber string `json:"phoneNumber"`
-	TabelogLink string `json:"tabelogLink"`	
+	OfficialLink string `json:"officialLink"`
+	TabelogLink string `json:"tabelogLink"`
+	Food string `json:"food"`
+	Style string `json:"style"`
+	NearStationName string `json:"nearStationName"`
+	OnFootTime int `json: onFootTime`
 }
 
 type GetBarListResponse struct {
@@ -115,7 +120,7 @@ func main() {
 
 		keywordSearch := keyword + search
 
-		sql := "SELECT a.bar_id, a.bar_name, a.number_of_taps, a.address, a.phone_number, a.tabelog_link FROM BAR_MASTER_TB a, NEAREST_STATION_TB b, STATION_MATSTER_TB c WHERE c.station_name LIKE $1 AND c.station_id = b.station_id AND b.bar_id = a.bar_id;"
+		sql := "SELECT a.bar_id, a.bar_name, a.number_of_taps, a.address, a.phone_number, a.official_link, a.tabelog_link, a.food, a.style, c.station_name, b.on_foot_time FROM BAR_MASTER_TB a, NEAREST_STATION_TB b, STATION_MATSTER_TB c WHERE c.station_name LIKE $1 AND c.station_id = b.station_id AND b.bar_id = a.bar_id;"
 
 		rows, err := Db.Query(sql, keywordSearch)
 		if err != nil {
@@ -124,7 +129,7 @@ func main() {
 		defer rows.Close()
 
 		for rows.Next(){
-			if err := rows.Scan(&bar.BarId, &bar.BarName, &bar.NumberOfTaps, &bar.Address, &bar.PhoneNumber, &bar.TabelogLink); err != nil {
+			if err := rows.Scan(&bar.BarId, &bar.BarName, &bar.NumberOfTaps, &bar.Address, &bar.PhoneNumber, &bar.OfficialLink, &bar.TabelogLink, &bar.Food, &bar.Style, &bar.NearStationName, &bar.OnFootTime); err != nil {
 				log.Fatal(err)
 			}
 			barList = append(barList, Bar{
@@ -133,7 +138,12 @@ func main() {
 					NumberOfTaps: bar.NumberOfTaps,
 					Address: bar.Address,
 					PhoneNumber: bar.PhoneNumber,
+					OfficialLink: bar.OfficialLink,
 					TabelogLink: bar.TabelogLink,
+					Food: bar.Food,
+					Style: bar.Style,
+					NearStationName: bar.NearStationName,
+					OnFootTime: bar.OnFootTime,
 				})
 		}
 
