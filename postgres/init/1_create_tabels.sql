@@ -17,7 +17,10 @@ CREATE TABLE BAR_MASTER_TB (
     number_of_taps INTEGER,
     address VARCHAR(256) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
-    tabelog_link TEXT
+    official_link TEXT,
+    tabelog_link TEXT,
+    food VARCHAR(256),
+    style VARCHAR(256)
 );
 
 CREATE TABLE BREWERY_HANDLED_TB (
