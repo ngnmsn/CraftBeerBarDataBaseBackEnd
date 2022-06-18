@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"os"
-	"net"
 	"net/http"
 	"io/ioutil"
 	"log"
@@ -29,22 +28,20 @@ func getStations(c echo.Context) error {
 
 	stationsByteValue, _ := ioutil.ReadAll(stationsJsonFile)
 	
-	var station Station
+	station := new(Station)
+	if err := c.Bind(station); err != nil {
+		return err
+	}
 	fmt.Println(station)
-	jsonErr := json.Unmarshal(stationsByteValue, &station)
-	fmt.Println(station)
-	fmt.Println(reflect.TypeOf(station))
+	var stations []station
+	jsonErr := json.Unmarshal(stationsByteValue, &stations)
+	fmt.Println(stations)
+	fmt.Println(reflect.TypeOf(stations))
 	log.Fatal(jsonErr)
-	return c.JSON(http.StatusOK, station)
+	return c.JSON(http.StatusOK, stations)
 }
 
 func main() {
-	l, err := net.Listen("tcp", "0.0.0.0:8080")
-	defer l.Close()
-	if err !=nil {
-		panic(err)
-	}
-	fmt.Println("wait...")
 	e := echo.New()
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello world")
