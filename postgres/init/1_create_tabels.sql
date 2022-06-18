@@ -20,7 +20,8 @@ CREATE TABLE BAR_MASTER_TB (
     official_link TEXT,
     tabelog_link TEXT,
     food VARCHAR(256),
-    style VARCHAR(256)
+    style VARCHAR(256),
+    list_image_url VARCHAR(256)
 );
 
 CREATE TABLE BREWERY_HANDLED_TB (
