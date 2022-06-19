@@ -3,6 +3,7 @@
 #     - plan: heroku-postgresql
 #       as: DATABASE
 build:
-  web: nginx/Dockerfile
+  docker:
+    web: nginx/Dockerfile
 #   config:
 #   worker: app/Dockerfile
