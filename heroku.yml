@@ -2,7 +2,7 @@
 #   addons:
 #     - plan: heroku-postgresql
 #       as: DATABASE
-# build:
-#   web: nginx/Dockerfile
+build:
+  web: nginx/Dockerfile
 #   config:
 #   worker: app/Dockerfile
