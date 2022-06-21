@@ -5,5 +5,3 @@ setup:
 build:
   docker:
     web: go/Dockerfile
-run:
-  web: 
