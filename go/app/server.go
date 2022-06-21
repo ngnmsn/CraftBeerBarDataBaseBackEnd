@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	// "encoding/json"
-	// "os"
+	"os"
 	// "io/ioutil"
 	"log"
     "net/http"
@@ -44,7 +44,8 @@ type GetBarListResponse struct {
 func main() {
 
 	var Db *sql.DB
-	Db, err := sql.Open("postgres", "host=postgres port=5432 user=app_user password=app_password dbname=app_db sslmode=disable")
+	Db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	// Db, err := sql.Open("postgres", "host=postgres port=5432 user=app_user password=app_password dbname=app_db sslmode=disable")
     if err != nil {
 		log.Fatal(err)
 	}
@@ -157,5 +158,5 @@ func main() {
 		c.Response().Header().Set(echo.HeaderAccessControlAllowOrigin, "http://localhost:4200")
         return c.JSON(http.StatusOK, getBarListResponse)
     })
-    e.Logger.Fatal(e.Start(":8080"))
+    e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 }
