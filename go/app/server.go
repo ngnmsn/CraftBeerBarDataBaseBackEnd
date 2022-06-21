@@ -158,5 +158,5 @@ func main() {
 		c.Response().Header().Set(echo.HeaderAccessControlAllowOrigin, "http://localhost:4200")
         return c.JSON(http.StatusOK, getBarListResponse)
     })
-    e.Logger.Fatal(e.Start(":8080"))
+    e.Logger.Fatal(e.Start(os.Getenv("PORT")))
 }
