@@ -3,7 +3,7 @@ setup:
     - plan: heroku-postgresql
       as: DATABASE
   config:
-    CORS: https://2ef60e8e.craftbeerbardatabase.pages.dev
+    CORS: https://craftbeerbardatabase.pages.dev/
 build:
   docker:
     web: go/Dockerfile
