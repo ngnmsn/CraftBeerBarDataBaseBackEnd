@@ -1,7 +1,7 @@
 FROM golang:1.17.6-alpine3.15
 
 WORKDIR /go/src/app
-ADD ./go/app .
+ADD ./app .
 
 RUN apk update && \
     apk add --no-cache git && \
