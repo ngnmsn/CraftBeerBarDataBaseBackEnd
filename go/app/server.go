@@ -107,7 +107,8 @@ func main() {
 		getStationsResponse.Stations = stations
 
 		fmt.Println(stations)
-		c.Response().Header().Set(echo.HeaderAccessControlAllowOrigin, "http://localhost:4200")
+		fmt.Println(os.Getenv("CORS"))
+		c.Response().Header().Set(echo.HeaderAccessControlAllowOrigin, os.Getenv("CORS"))
         return c.JSON(http.StatusOK, getStationsResponse)
     })
 	e.GET("/getBarList", func(c echo.Context) error {
@@ -155,7 +156,8 @@ func main() {
 		getBarListResponse.BarList = barList
 
 		fmt.Println(barList)
-		c.Response().Header().Set(echo.HeaderAccessControlAllowOrigin, "http://localhost:4200")
+		fmt.Println(os.Getenv("CORS"))
+		c.Response().Header().Set(echo.HeaderAccessControlAllowOrigin, os.Getenv("CORS"))
         return c.JSON(http.StatusOK, getBarListResponse)
     })
     e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
