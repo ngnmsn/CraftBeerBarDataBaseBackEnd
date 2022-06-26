@@ -14,14 +14,15 @@ services:
     depends_on:
       - db
     build:
-      context: .
-      dockerfile: ./go/Dockerfile
-    volumes:
-      - ./go/app:/go/src/app
+      context: ./go
+      dockerfile: ./Dockerfile
+    # volumes:
+    #   - ./go/app:/go/src/app
     ports:
       - "8080:8080"
     environment:
       - CORS=http://localhost:4200
+      - DATABASE_URL=postgresql://postgres:5432/app_db?user=app_user&password=app_password&sslmode=disable
     tty: true
 
   db:
