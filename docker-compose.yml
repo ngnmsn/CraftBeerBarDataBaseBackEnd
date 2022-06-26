@@ -15,11 +15,13 @@ services:
       - db
     build:
       context: .
-      dockerfile: app/Dockerfile
+      dockerfile: ./go/Dockerfile
     volumes:
-      - ./app:/go/src/app
+      - ./go/app:/go/src/app
     ports:
       - "8080:8080"
+    environment:
+      - CORS=http://localhost:4200
     tty: true
 
   db:

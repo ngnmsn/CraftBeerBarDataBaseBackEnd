@@ -1,7 +1,7 @@
 FROM golang:1.17.6-alpine3.15
 
 WORKDIR /go/src/app
-ADD ./app .
+ADD ./go/app .
 
 RUN apk update && \
     apk add --no-cache git && \
@@ -11,7 +11,9 @@ RUN apk update && \
 
 ENV CGO_ENABLED=0 \
     GOOS=linux \
-    GOARCH=amd64
+    GOARCH=amd64 \
+    PORT=8080 \
+    CORS=http://localhost:4200
 
 EXPOSE 8080
 
