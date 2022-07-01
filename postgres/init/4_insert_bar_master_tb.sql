@@ -1,3 +1,6 @@
 DELETE FROM BAR_MASTER_TB;
 INSERT INTO BAR_MASTER_TB VALUES(1, 'Craftman Yokohama', 31, '神奈川県横浜市神奈川区鶴屋町2-16-4', '045-624-8288', 'https://craftsman-craftbeer-yokohama.com/','https://tabelog.com/kanagawa/A1401/A140101/14062941/', 'Mex-Italian', 'ダイニングバー', '1/1_1.jpg');
 INSERT INTO BAR_MASTER_TB VALUES(2, 'CRAFTMAN', 31, '東京都品川区西五反田2-18-3 グレイス五反田1階', '03-6420-3402', 'https://craftsman-craftbeerbistro.jp/','https://tabelog.com/tokyo/A1316/A131603/13161379/', 'ビストロ', 'ダイニングバー', '2/2_1.jpg');
+INSERT INTO BAR_MASTER_TB VALUES(3, '伊勢角屋麦酒 エキュートエディション新橋店', 10, '東京都港区新橋2-17-14 JR東日本新橋駅', '050-5872-1553', 'https://isekadoyabeer.jp/shimbashi.html','https://tabelog.com/tokyo/A1301/A130103/13268982/', '日本食', '居酒屋', '3/3_1.jpg');
+INSERT INTO BAR_MASTER_TB VALUES(4, 'BrewDog Roppongi', 20, '東京都港区六本木5-3-2 斉藤ビル1F', '03-6447-4160', 'https://www.brewdog.jp/bar/','https://tabelog.com/tokyo/A1301/A130103/13268982/', '日本食', '居酒屋', '4/4_1.jpg');
+INSERT INTO BAR_MASTER_TB VALUES(5, 'DRAスタンド', 12, '東京都千代田区内幸町1-7-22 日比谷グルメゾン', '050-5597-8742', 'https://dream-on-company.com/groupshop/shop19.html','https://tabelog.com/tokyo/A1302/A130201/13247817/', 'イタリアン', 'スタンディングバー', '5/5_1.jpg');
